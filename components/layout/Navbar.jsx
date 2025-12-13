@@ -2,10 +2,14 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 
 const Navbar = () => {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [openDropdown, setOpenDropdown] = useState(null);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -37,38 +41,56 @@ const Navbar = () => {
     setOpenDropdown(openDropdown === index ? null : index);
   };
 
+  // 🔹 Scroll effect فقط في صفحة Home
   useEffect(() => {
+    if (!isHome) {
+      setIsScrolled(true); // أي صفحة غير الهوم تبقى أسود دايمًا
+      return;
+    }
+
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 600);
+      setIsScrolled(window.scrollY > 80);
     };
 
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [isHome]);
 
   return (
     <motion.header
       initial={{ y: -80, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.7, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-black shadow-lg' : 'bg-primary'
-      }`}
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500
+        ${
+          isHome
+            ? isScrolled
+              ? 'bg-[#02102b]/95 backdrop-blur-md shadow-lg'
+              : 'bg-transparent'
+            : 'bg-[#02102b] shadow-lg'
+        }
+      `}
     >
-      <div className="bg-[#02208b] text-white text-xs py-2">
-        <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-          <div>
-            Al Moltaqa Al Arabi District, Sheraton, Cairo Governorate, Egypt
+      {/* TOP BAR (يظهر في الصفحات غير الهوم أو بعد Scroll في الهوم) */}
+      {isScrolled && (
+        <div className="bg-[#02208b] text-white text-xs py-2">
+          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <div>
+              Al Moltaqa Al Arabi District, Sheraton, Cairo Governorate, Egypt
+            </div>
+            <div className="flex items-center gap-4">
+              CALL US: +201124368888
+            </div>
           </div>
-          <div className="flex items-center gap-4">CALL US: +201124368888</div>
         </div>
-      </div>
+      )}
 
+      {/* MAIN NAV */}
       <div className="max-w-7xl mx-auto px-6 h-[70px] flex justify-between items-center">
         {/* LOGO */}
         <Link
           href="/"
-          className="text-white font-bold text-2xl tracking-wide hover:text-[#8ba6ff]"
+          className="text-white font-bold text-2xl tracking-wide hover:text-[#8ba6ff] transition"
         >
           MITworx
         </Link>
@@ -94,7 +116,6 @@ const Navbar = () => {
                     </span>
                   </motion.button>
 
-                  {/* DROPDOWN */}
                   <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     animate={
@@ -142,62 +163,6 @@ const Navbar = () => {
               <HiOutlineMenu size={28} color="white" />
             )}
           </button>
-        </div>
-      </div>
-
-      {/* MOBILE MENU */}
-      <div
-        className={`md:hidden fixed top-0 left-0 h-full w-64 bg-[#002f47] text-white transform transition-transform duration-500 z-50 ${
-          mobileOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
-      >
-        <div className="px-6 py-6 space-y-4">
-          {menuItems.map((item, index) => (
-            <div key={index}>
-              {item.dropdown ? (
-                <>
-                  <button
-                    onClick={() => toggleDropdown(index)}
-                    className="flex justify-between w-full text-left py-2 uppercase tracking-wider text-sm"
-                  >
-                    {item.name}
-                    <span
-                      className={`transition-transform duration-300 ${
-                        openDropdown === index ? 'rotate-180' : ''
-                      }`}
-                    >
-                      ▾
-                    </span>
-                  </button>
-
-                  <div
-                    className={`pl-4 overflow-hidden transition-all duration-500 ${
-                      openDropdown === index ? 'max-h-96' : 'max-h-0'
-                    }`}
-                  >
-                    {item.dropdown.map((dropItem, i) => (
-                      <Link
-                        key={i}
-                        href={dropItem.href}
-                        className="block py-2 text-sm hover:text-cyan-400"
-                        onClick={() => setMobileOpen(false)}
-                      >
-                        {dropItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                </>
-              ) : (
-                <Link
-                  href={item.href}
-                  className="block py-2 uppercase tracking-wider text-sm hover:text-cyan-400"
-                  onClick={() => setMobileOpen(false)}
-                >
-                  {item.name}
-                </Link>
-              )}
-            </div>
-          ))}
         </div>
       </div>
     </motion.header>
