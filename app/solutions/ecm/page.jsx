@@ -1,7 +1,5 @@
 'use client';
 
-import { useState } from 'react';
-import { motion } from 'framer-motion';
 import Link from 'next/link';
 import TabsSection from '@/components/TabsSection';
 import PageHero from '@/components/PageHero';
@@ -115,19 +113,56 @@ export default function ECMPage() {
       />
       <main className="bg-gray-50 text-gray-800">
         <InfoSection
-          title="Empowering Innovation in the Middle East"
-          paragraphs={[
-            'Stop wasting time searching for lost documents or dealing with version control headaches. Our ECM solutions empower your business to:  '
-          ]}
-          listItems={[
-            'Centralize all your documents in a secure, easily accessible location.',
-            'Streamline workflows and boost efficiency with automated processes.',
-            'Collaborate effortlessly with real-time document sharing and editing tools.',
-            'Ensure compliance with industry regulations and information security best practices.'
-          ]}
-          imageSrc="/images/hero1.jpg"
-          buttons={[{ text: 'Free Consultation', link: '/contact' }]}
+          header="Enterprise Content Management (ECM)"
+          image="/images/hero6.jpg"
+          content={
+            <div>
+              <p className="text-gray-700 text-lg">
+                <strong>Stop wasting time searching</strong> for lost documents
+                or dealing with version control headaches. Our ECM solutions
+                empower your business to:
+              </p>
+
+              <ul className="space-y- my-6">
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong> Centralize all your documents</strong> in a secure,
+                    easily accessible location.
+                  </p>
+                </li>
+
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong>Streamline workflows</strong> and boost efficiency
+                    with automated processes.
+                  </p>
+                </li>
+
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong> Collaborate effortlessly</strong> with real-time
+                    document sharing and editing tools.
+                  </p>
+                </li>
+
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong> Ensure compliance</strong> with industry
+                    regulations and information security best practices.
+                  </p>
+                </li>
+              </ul>
+
+              <a
+                href="mailto:info@mitworx.com"
+                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+              >
+                Free Consultation
+              </a>
+            </div>
+          }
         />
+
         <section
           style={{ backgroundImage: `url('/images/background.png')` }}
           className="py-24 bg-cover bg-center bg-no-repeat"

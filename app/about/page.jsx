@@ -17,17 +17,29 @@ export default function About() {
       <main className="bg-white text-gray-800">
         {/* ================= HERO + BREADCRUMB ================= */}
         {/* ================= INTRO ================= */}
-          <InfoSection
-            title="Empowering Innovation in the Middle East"
-            paragraphs={[
-              'MITworx is a leading technology innovation company with a proven track record of success. We established ourselves in the United Arab Emirates (UAE), where our team of experts delivered exceptional results.',
-              'We’re bringing our expertise to Egypt, ready to revolutionize the technological landscape here.'
-            ]}
-            imageSrc="/images/hero2.jpg"
-            buttons={[
-              { text: 'Contact Us', link: '/contact' }
-            ]}
-          />
+        <InfoSection
+          header="Empowering Innovation in the Middle East"
+          image="/images/hero2.jpg"
+          content={
+            <div>
+              <p className="text-gray-700 text-lg mb-5">
+                MITworx is a leading technology innovation company with a proven
+                track record of success. We established ourselves in the United
+                Arab Emirates (UAE), where our team of experts delivered
+                exceptional results., We’re bringing our expertise to Egypt,
+                ready to revolutionize the technological landscape here.
+              </p>
+
+              <Link
+                href="/contact"
+                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+              >
+                Contact Us
+              </Link>
+            </div>
+          }
+        />
+
         {/* ================= MISSION & LEGACY ================= */}
         <section
           style={{ backgroundImage: `url('/images/background.png')` }}

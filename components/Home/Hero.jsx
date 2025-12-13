@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 
 const slides = [
   {
@@ -58,12 +59,19 @@ export default function Hero() {
         </p>
 
         <div className="mt-8 flex justify-center gap-4">
-          <a className=" cursor-pointer px-6 py-3 bg-blue-700 text-white rounded-md font-semibold hover:bg-blue-800 transition">
+          <Link
+            href="/contact"
+            className="px-6 py-3 bg-blue-700 text-white rounded-md font-semibold hover:bg-blue-800 transition"
+          >
             Work With US
-          </a>
-          <a className="cursor-pointer px-6 py-3 bg-white text-gray-900 rounded-md font-semibold hover:bg-gray-100 transition">
+          </Link>
+
+          <Link
+            href="/about"
+            className="px-6 py-3 bg-white text-gray-900 rounded-md font-semibold hover:bg-gray-100 transition"
+          >
             Learn More
-          </a>
+          </Link>
         </div>
       </div>
 

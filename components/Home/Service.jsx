@@ -7,32 +7,32 @@ const services = [
   {
     img: '/images/services/ECM.png',
     title: 'Enterprise Content Management',
-    link: '/service-1'
+    link: '/solutions/ecm'
   },
   {
     img: '/images/services/Managed.jpg',
     title: 'Managed Print Services',
-    link: '/service-2'
+    link: '/solutions/mps'
   },
   {
     img: '/images/services/ECM.png',
     title: 'Business Consulting',
-    link: '/service-3'
+    link: '/services/consulting'
   },
   {
     img: '/images/services/business-workflow.jpg',
-    title: 'Business Workflow Automation',
-    link: '/service-4'
+    title: 'Educational Technology',
+    link: '/solutions/educations'
   },
   {
     img: '/images/services/Intelligent.jpg',
     title: 'Intelligent Content Capture',
-    link: '/service-5'
+    link: '/solutions/mps'
   },
   {
     img: '/images/services/ECM.png',
     title: 'Digital Marketing',
-    link: '/service-6'
+    link: '/solutions/mps'
   }
 ];
 

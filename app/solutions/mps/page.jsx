@@ -107,17 +107,71 @@ export default function MPSPage() {
       />
       <main className="bg-gray-50 text-gray-800">
         <InfoSection
-          title="Managed Print Services (MPS)"
-          listItems={[
-            'Fleet Assessment & Optimization: We analyze your current printing needs and recommend the right mix of devices to maximize efficiency and minimize costs.',
-            'Cost Control & Transparency: Enjoy predictable monthly billing with no hidden fees. We ensure you only pay for the printing you actually use.',
-            'Automatic Toner & Supply Replenishment: Never run out of ink or toner again. We proactively monitor supply levels and automatically deliver replacements before you experience any downtime.',
-            'On-site Service & Support: Our team of technicians is readily available to address any printer issues promptly, minimizing downtime and keeping your productivity flowing.',
-            'Enhanced Document Security: We implement advanced security features to safeguard sensitive information printed on your devices.',
-            'Sustainability Initiatives: Reduce your environmental impact with our eco-friendly printing practices and responsible toner cartridge recycling programs.'
-          ]}
-          imageSrc="/images/hero3.jpg"
-          buttons={[{ text: 'Free Consultation', link: '/contact' }]}
+          header="Managed Print Services (MPS)"
+          image="/images/hero1.jpg"
+          content={
+            <div>
+              <ul className="space-y-5 my-6">
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong> Fleet Assessment & Optimization:</strong> We
+                    analyze your current printing needs and recommend the right
+                    mix of devices to maximize efficiency and minimize costs.
+                  </p>
+                </li>
+
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong> Cost Control & Transparency :</strong> Enjoy
+                    predictable monthly billing with no hidden fees. We ensure
+                    you only pay for the printing you actually use.
+                  </p>
+                </li>
+
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong> Automatic Toner & Supply Replenishment :</strong>
+                    Never run out of ink or toner again. We proactively monitor
+                    supply levels and automatically deliver replacements before
+                    you experience any downtime.
+                  </p>
+                </li>
+
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong>On-site Service & Support :</strong> Our team of
+                    technicians is readily available to address any printer
+                    issues promptly, minimizing downtime and keeping your
+                    productivity flowing.
+                  </p>
+                </li>
+
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong> Enhanced Document Security :</strong> We implement
+                    advanced security features to safeguard sensitive
+                    information printed on your devices.
+                  </p>
+                </li>
+
+                <li>
+                  <p className="text-gray-600 text-lg leading-relaxed">
+                    <strong> Sustainability Initiatives :</strong> Reduce your
+                    environmental impact with our eco-friendly printing
+                    practices and responsible toner cartridge recycling
+                    programs.
+                  </p>
+                </li>
+              </ul>
+
+              <a
+                href="mailto:info@mitworx.com"
+                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition"
+              >
+                Free Consultation
+              </a>
+            </div>
+          }
         />
         <section
           style={{ backgroundImage: `url('/images/background.png')` }}
@@ -138,7 +192,7 @@ export default function MPSPage() {
             Contact us today
           </h2>
           <p className="max-w-2xl mx-auto mb-6">
-            Discover how our ECM solutions can empower your business.
+            Discover how our MPS solutions can empower your business.
           </p>
           <Link
             href="/contact"

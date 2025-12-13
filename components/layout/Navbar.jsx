@@ -23,7 +23,7 @@ const Navbar = () => {
         { name: 'Enterprise Content Management', href: '/solutions/ecm' },
         { name: 'Managed Print Services', href: '/solutions/mps' },
         { name: 'Intelligent Content Capture', href: '/solutions/capture' },
-        { name: 'Educational Technology', href: '/solutions/education' }
+        { name: 'Educational Technology', href: '/solutions/educations' }
       ]
     },
     {
@@ -71,7 +71,7 @@ const Navbar = () => {
         }
       `}
     >
-      {/* TOP BAR (يظهر في الصفحات غير الهوم أو بعد Scroll في الهوم) */}
+     
       {isScrolled && (
         <div className="bg-[#02208b] text-white text-xs py-2">
           <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
