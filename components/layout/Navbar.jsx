@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { HiOutlineMenu, HiOutlineX } from 'react-icons/hi';
 
 const Navbar = () => {
@@ -37,14 +36,9 @@ const Navbar = () => {
     { name: 'Contact Us', href: '/contact' }
   ];
 
-  const toggleDropdown = index => {
-    setOpenDropdown(openDropdown === index ? null : index);
-  };
-
-  // 🔹 Scroll effect فقط في صفحة Home
   useEffect(() => {
     if (!isHome) {
-      setIsScrolled(true); // أي صفحة غير الهوم تبقى أسود دايمًا
+      setIsScrolled(true);
       return;
     }
 
@@ -57,115 +51,150 @@ const Navbar = () => {
   }, [isHome]);
 
   return (
-    <motion.header
-      initial={{ y: -80, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.7, ease: 'easeOut' }}
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500
-        ${
-          isHome
-            ? isScrolled
-              ? 'bg-[#02102b]/95 backdrop-blur-md shadow-lg'
-              : 'bg-transparent'
-            : 'bg-[#02102b] shadow-lg'
-        }
-      `}
-    >
-     
-      {isScrolled && (
-        <div className="bg-[#02208b] text-white text-xs py-2">
-          <div className="max-w-7xl mx-auto px-6 flex justify-between items-center">
-            <div>
-              Al Moltaqa Al Arabi District, Sheraton, Cairo Governorate, Egypt
-            </div>
-            <div className="flex items-center gap-4">
-              CALL US: +201124368888
-            </div>
+    <>
+      {/* HEADER WRAPPER */}
+      <header className="fixed top-0 left-0 w-full z-50">
+        {/* 🔵 TOP BLUE BAR (ثابت دايمًا) */}
+        <div className="bg-[#02208b] text-white text-[10px] md:text-xs h-[40px] flex items-center">
+          <div className="max-w-7xl mx-auto px-6 w-full flex justify-between">
+            <span>Al Moltaqa Al Arabi District, Sheraton, Cairo</span>
+            <span>CALL US: +201124368888</span>
           </div>
         </div>
+
+        {/* MAIN NAV */}
+        <div
+          className={`transition-all duration-300
+            ${
+              isHome
+                ? isScrolled
+                  ? 'bg-[#02102b]'
+                  : 'bg-transparent'
+                : 'bg-[#02102b]'
+            }
+          `}
+        >
+          <div className="max-w-7xl mx-auto px-6 h-[70px] flex justify-between items-center">
+            {/* LOGO */}
+            <Link href="/" className="text-white text-2xl font-bold">
+              MITworx
+            </Link>
+
+            {/* DESKTOP MENU */}
+            <ul className="hidden md:flex items-center gap-6 text-white">
+              {menuItems.map((item, index) => (
+                <li key={index} className="relative">
+                  {item.dropdown ? (
+                    <>
+                      <button
+                        onClick={() =>
+                          setOpenDropdown(openDropdown === index ? null : index)
+                        }
+                        className="uppercase text-sm"
+                      >
+                        {item.name} ▾
+                      </button>
+
+                      {openDropdown === index && (
+                        <div className="absolute top-full mt-4 w-72 bg-white text-black rounded-lg shadow-xl">
+                          {item.dropdown.map((drop, i) => (
+                            <Link
+                              key={i}
+                              href={drop.href}
+                              onClick={() => setOpenDropdown(null)}
+                              className="block px-6 py-3 hover:bg-gray-100"
+                            >
+                              {drop.name}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </>
+                  ) : (
+                    <Link href={item.href} className="uppercase text-sm">
+                      {item.name}
+                    </Link>
+                  )}
+                </li>
+              ))}
+            </ul>
+
+            {/* MOBILE ICON */}
+            <button
+              className="md:hidden text-white z-50 cursor-pointer"
+              onClick={() => {
+                setMobileOpen(true);
+                setOpenDropdown(null);
+              }}
+            >
+              <HiOutlineMenu size={28} />
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* OVERLAY */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 bg-black/60 z-40"
+          onClick={() => setMobileOpen(false)}
+        />
       )}
 
-      {/* MAIN NAV */}
-      <div className="max-w-7xl mx-auto px-6 h-[70px] flex justify-between items-center">
-        {/* LOGO */}
-        <Link
-          href="/"
-          className="text-white font-bold text-2xl tracking-wide hover:text-[#8ba6ff] transition"
-        >
-          MITworx
-        </Link>
+      {/* MOBILE MENU */}
+      {mobileOpen && (
+        <div className="fixed top-0 right-0 h-screen w-[85%] bg-[#02102b] z-50 pt-[110px] px-6 ">
+          <button
+            className="absolute top-5 right-5 text-white cursor-pointer"
+            onClick={() => setMobileOpen(false)}
+          >
+            <HiOutlineX size={28} />
+          </button>
 
-        {/* DESKTOP MENU */}
-        <ul className="hidden md:flex items-center gap-6 text-white font-medium">
-          {menuItems.map((item, index) => (
-            <li key={index} className="relative">
-              {item.dropdown ? (
-                <>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    className="flex items-center gap-1 uppercase text-sm tracking-wider"
-                    onClick={() => toggleDropdown(index)}
+          <ul className="flex flex-col gap-6 text-white text-lg ">
+            {menuItems.map((item, index) => (
+              <li key={index}>
+                {item.dropdown ? (
+                  <>
+                    <button
+                      className="w-full text-left uppercase "
+                      onClick={() =>
+                        setOpenDropdown(openDropdown === index ? null : index)
+                      }
+                    >
+                      {item.name} ▾
+                    </button>
+
+                    {openDropdown === index && (
+                      <ul className="mt-3 ml-4 space-y-3 text-sm text-gray-300 ">
+                        {item.dropdown.map((drop, i) => (
+                          <li key={i}>
+                            <Link
+                              href={drop.href}
+                              onClick={() => setMobileOpen(false)}
+                            >
+                              {drop.name}
+                            </Link>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </>
+                ) : (
+                  <Link
+                    href={item.href}
+                    onClick={() => setMobileOpen(false)}
+                    className="uppercase"
                   >
                     {item.name}
-                    <span
-                      className={`transition-transform duration-300 ${
-                        openDropdown === index ? 'rotate-180' : ''
-                      }`}
-                    >
-                      ▾
-                    </span>
-                  </motion.button>
-
-                  <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={
-                      openDropdown === index
-                        ? { opacity: 1, y: 0 }
-                        : { opacity: 0, y: 20 }
-                    }
-                    transition={{ duration: 0.3 }}
-                    className={`absolute left-0 top-full mt-4 w-72 bg-white text-black rounded-lg shadow-xl overflow-hidden ${
-                      openDropdown === index
-                        ? 'pointer-events-auto'
-                        : 'pointer-events-none'
-                    }`}
-                  >
-                    {item.dropdown.map((dropItem, i) => (
-                      <Link
-                        key={i}
-                        href={dropItem.href}
-                        className="block px-6 py-3 hover:bg-gray-100 transition"
-                        onClick={() => setOpenDropdown(null)}
-                      >
-                        {dropItem.name}
-                      </Link>
-                    ))}
-                  </motion.div>
-                </>
-              ) : (
-                <Link
-                  href={item.href}
-                  className="uppercase text-sm tracking-wider hover:text-[#8ba6ff] transition"
-                >
-                  {item.name}
-                </Link>
-              )}
-            </li>
-          ))}
-        </ul>
-
-        {/* MOBILE ICON */}
-        <div className="md:hidden">
-          <button onClick={() => setMobileOpen(!mobileOpen)}>
-            {mobileOpen ? (
-              <HiOutlineX size={28} color="white" />
-            ) : (
-              <HiOutlineMenu size={28} color="white" />
-            )}
-          </button>
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
-      </div>
-    </motion.header>
+      )}
+    </>
   );
 };
 
