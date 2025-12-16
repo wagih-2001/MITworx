@@ -77,14 +77,14 @@ export default function Hero() {
 
       <button
         onClick={prevSlide}
-        className="absolute left-5 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-3 rounded-full text-2xl"
+        className="absolute left-5 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-3 rounded-full text-2xl cursor-pointer"
       >
         ❮
       </button>
 
       <button
         onClick={nextSlide}
-        className="absolute right-5 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-3 rounded-full text-2xl"
+        className="absolute right-5 top-1/2 -translate-y-1/2 text-white bg-black/40 hover:bg-black/60 p-3 rounded-full text-2xl cursor-pointer"
       >
         ❯
       </button>

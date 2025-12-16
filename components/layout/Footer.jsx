@@ -1,5 +1,7 @@
 'use client';
 import Link from 'next/link';
+import Image from 'next/image';
+
 import {
   FaFacebook,
   FaLinkedin,
@@ -18,7 +20,15 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-4 gap-12">
           {/*COMPANY INFO */}
           <div>
-            <h2 className="text-2xl font-bold mb-4">MITWORX</h2>
+            <Link href="/" className="inline-block mb-4 ">
+              <Image
+                src="/images/logo-white.png"
+                alt="MITworx logo"
+                width={175}
+                height={175}
+                priority
+              />
+            </Link>
             <p className="text-gray-300 text-sm leading-6">
               Al Moltaqa Al Arabi District, Sheraton, Cairo Governorate, Egypt
             </p>
@@ -104,11 +114,6 @@ const Footer = () => {
               <li>
                 <Link href="/services/consulting" className="hover:text-white">
                   Business Consulting
-                </Link>
-              </li>
-              <li>
-                <Link href="/marketing" className="hover:text-white">
-                  Digital Marketing
                 </Link>
               </li>
             </ul>

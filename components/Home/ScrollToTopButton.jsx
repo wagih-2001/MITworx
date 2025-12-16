@@ -34,6 +34,7 @@ export default function ScrollToTopButton() {
         text-white
         w-14
         h-14
+        mt-10
         rounded-full
         border-2
         border-white
@@ -44,7 +45,6 @@ export default function ScrollToTopButton() {
         hover:bg-[#0f3db8]
         transition
         mx-auto
-        mt-10
         block
         z-50
       "
